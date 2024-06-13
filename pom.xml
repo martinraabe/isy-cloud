@@ -12,6 +12,8 @@
 
     <modules>
         <module>ref-impl-basis</module>
+    	  <module>ref-impl-isy-security-rw</module>
+        <module>ref-impl-isy-security-w</module>
     </modules>
 
     <dependencyManagement>
