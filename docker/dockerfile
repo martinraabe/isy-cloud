@@ -1,0 +1,14 @@
+# Verwenden Sie ein offizielles OpenJDK 17 Runtime-Image als Basis
+FROM openjdk:17-jdk-slim
+
+# Setzen Sie das Arbeitsverzeichnis im Container
+WORKDIR /app
+
+# Kopieren Sie Ihre JAR-Datei in das Arbeitsverzeichnis im Container
+COPY ref-impl-basis-0.0.0-SNAPSHOT.jar app.jar
+
+# Öffnen Sie Port 8080 für die Außenwelt
+EXPOSE 8081
+
+# Führen Sie die JAR-Datei aus
+ENTRYPOINT ["java", "-jar", "app.jar"]

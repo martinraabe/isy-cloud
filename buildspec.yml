@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo Installing Maven
+      - yum install -y maven
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin ${ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com
+      - echo Build starting on `date`
+      - cd ref-impl-basis
+      - mvn clean install
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - mvn package
+      - echo Build completed on `date`
+      - echo Building the Docker image...
+      - cd ..
+      - cd docker
+      - cp ../ref-impl-basis/target/ref-impl-basis-0.0.0-SNAPSHOT.jar .
+      - docker build -t isy-app .
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo ${DOCKER_TAG}   
+      - docker tag isy-app:latest ${ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/isfact-standards-referenzimplementierung:latest
+      - echo  ${DOCKER_PUSH}
+      - docker push ${ACCOUNT}.dkr.ecr.eu-central-1.amazonaws.com/isfact-standards-referenzimplementierung:latest
