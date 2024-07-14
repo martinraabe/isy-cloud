@@ -28,7 +28,7 @@ public class ProduktControllerTest {
     @Test
     public void testFindProduktBoById() throws ProduktNotFoundException {
 
-        for (long i = 1; i <= 3; i++) {
+        for (long i = 1; i <= 4; i++) {
 
             // when
             ProduktBo produktBo =
