@@ -3,4 +3,5 @@ VALUES
 
  (1,'HAHAHAH','Hartkäse'),
  (2,'Appenzeller','Bergkäse'),
- (3,'Pellegrino','Ziegenkäse');
+ (3,'Pellegrino','Ziegenkäse'),
+ (4,'Parmesan','Hartkäse');
